@@ -2,7 +2,7 @@ const express = require('express');
 
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const User = require('../models/User')
+const User = require('../models/user')
 
 const app = express();
 
