@@ -1,4 +1,16 @@
 //=============
+//Token expiration
+//=============
+//60 segs * 60 min * 24 hours * days
+process.env.TOKEN_EXPIRES = 60 * 60 * 24 * 30;
+
+//=============
+//Auth SEED
+//=============
+process.env.SEED_AUTH = process.env.SEED_AUTH || 'seed-auth-fabri';
+
+
+//=============
 //port
 //=============
 

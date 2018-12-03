@@ -3,11 +3,12 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
 const User = require('../models/user')
+const { verifyToken,checkAdminRole } = require('../middlewares/authentication');
 
 const app = express();
 
 
-app.get('/user', function (req,res) {
+app.get('/user', verifyToken , function (req,res) {
     //res.json('get User');
 
     let from = req.query.from || 0;
@@ -47,7 +48,7 @@ app.get('/user', function (req,res) {
         });
 });
 
-app.post('/user', function (req,res) {
+app.post('/user', [verifyToken,checkAdminRole] , function (req,res) {
     let body = req.body;
 
     let user = new User({
@@ -95,7 +96,7 @@ app.post('/user', function (req,res) {
 
 });
 
-app.put('/user/:id', function (req,res) {
+app.put('/user/:id',  [verifyToken,checkAdminRole] , function (req,res) {
 
     let id = req.params.id;
 
@@ -123,7 +124,7 @@ app.put('/user/:id', function (req,res) {
 
 });
 
-app.delete('/user/:id', function (req,res) {
+app.delete('/user/:id',  [verifyToken,checkAdminRole] ,function (req,res) {
     //res.json('delete User');
     let id = req.params.id;
 
